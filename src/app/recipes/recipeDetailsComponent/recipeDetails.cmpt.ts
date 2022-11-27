@@ -13,16 +13,17 @@ type tRecipe = {
   comments: tComment[];
   ingredients: { id: number; ingredient: string }[];
   likes: tLike[];
-  methods: { id: number; method: string };
+  methods: { id: number; method: string }[];
   name: string;
   numberOfServings: number;
-  userId: { user: string };
+  userId: { username: string };
   _id: number;
 };
 
 @Component({
   selector: 'recipe',
   templateUrl: './recipeDetails.cmpt.html',
+  styleUrls: ['./recipeDetails.cmpt.css'],
 })
 export class RecipeDetailsComponent {
   recipe!: tRecipe;
