@@ -1,0 +1,15 @@
+<h2>Recipes</h2>
+<ul class="list-group list-group-flush">
+  <li
+    class="list-group-item d-flex justify-content-between"
+    *ngFor="let recipe of recipes"
+  >
+    <span>
+      <a [routerLink]="['/recipes', recipe._id]">{{ recipe.name }}</a>
+      <span class="badge rounded-pill p-2 m-2 cursor-pointer bg-secondary">{{
+        recipe.category.name
+      }}</span>
+    </span>
+    <span class="px-3 m-1 d-flex">{{ recipe.likes.length }}</span>
+  </li>
+</ul>

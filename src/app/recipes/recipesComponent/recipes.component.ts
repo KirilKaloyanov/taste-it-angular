@@ -4,7 +4,8 @@ import { RecipeService } from '../recipes.service';
 
 @Component({
   selector: 'recipes',
-  template: ` <h2>Recipes</h2> `,
+  templateUrl: './recipes.component.html',
+  styleUrls: ['./recipes.component.css'],
 })
 export class RecipesComponent {
   recipes!: any[];
@@ -17,7 +18,6 @@ export class RecipesComponent {
     // });
     this.recipeService.getRecipes().subscribe((recipes) => {
       this.recipes = recipes;
-      console.log(this.recipes);
     });
   }
 }

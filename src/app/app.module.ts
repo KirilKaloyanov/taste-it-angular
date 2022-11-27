@@ -7,10 +7,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { RecipesModule } from './recipes/recipes.module';
 
 import { AppComponent } from './app.component';
+import { HomeComponent } from './homeComponent/home.component';
+import { NavbarComponent } from './navbarComponent/navbar.component';
 // import { RecipeService } from './recipes.service';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, HomeComponent, NavbarComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, RecipesModule],
   providers: [], //RecipeService
   bootstrap: [AppComponent],
