@@ -10,4 +10,10 @@ export class RecipeService {
       'https://taste-it-api-node.herokuapp.com/api/recipes'
     );
   }
+
+  getSingleRecipe(id: number) {
+    return this.http.get<any>(
+      'https://taste-it-api-node.herokuapp.com/api/recipes/' + id
+    );
+  }
 }

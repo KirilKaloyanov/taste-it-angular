@@ -6,9 +6,9 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { RecipesModule } from './recipes/recipes.module';
 
-import { AppComponent } from './app.component';
-import { HomeComponent } from './homeComponent/home.component';
-import { NavbarComponent } from './navbarComponent/navbar.component';
+import { AppComponent } from './app.cmpt';
+import { HomeComponent } from './homeComponent/home.cmpt';
+import { NavbarComponent } from './navbarComponent/navbar.cmpt';
 // import { RecipeService } from './recipes.service';
 
 @NgModule({

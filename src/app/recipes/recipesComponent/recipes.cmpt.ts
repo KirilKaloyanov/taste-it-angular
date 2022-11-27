@@ -4,8 +4,7 @@ import { RecipeService } from '../recipes.service';
 
 @Component({
   selector: 'recipes',
-  templateUrl: './recipes.component.html',
-  styleUrls: ['./recipes.component.css'],
+  templateUrl: './recipes.cmpt.html',
 })
 export class RecipesComponent {
   recipes!: any[];
