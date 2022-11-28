@@ -1,6 +1,9 @@
 <div *ngIf="recipe">
   <h2>{{recipe.name}}</h2>
-  <div class="badge rounded-pill p-2 m-2 bg-info">{{recipe.category.name}}</div>
+  <span class="badge rounded-pill p-2 m-2 bg-info"
+    >{{recipe.category.name}}
+  </span>
+  <span>Likes: {{recipeLikes.length}}</span>
   <h5>Number of servings: {{recipe.numberOfServings}}</h5>
   <ul>
     <li *ngFor="let i of recipe.ingredients">{{i.ingredient}}</li>
