@@ -1,6 +1,7 @@
 <h2>Recipes</h2>
 <recipes-filter
   [categories]="categories"
+  [selectedCategory]="selectedCategory"
   (changeCategory)="setSelectedCategory($event)"
 ></recipes-filter>
 <ul class="list-group list-group-flush">

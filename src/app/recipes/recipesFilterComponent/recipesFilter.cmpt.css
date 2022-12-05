@@ -3,4 +3,9 @@ li {
   padding: 10px 10px;
   list-style: none;
   margin: 10px, 20px;
+  cursor: pointer;
+}
+
+.underlined {
+  border-bottom: 3px solid rgb(255, 238, 0);
 }

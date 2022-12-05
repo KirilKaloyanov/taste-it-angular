@@ -7,6 +7,7 @@ import { TCategory } from 'src/app/shared/interfaces';
   template: `
     <ul>
       <li
+        [class.underlined]="selectedCategory == category.name"
         *ngFor="let category of categories"
         (click)="selectCategory(category)"
       >
@@ -18,10 +19,11 @@ import { TCategory } from 'src/app/shared/interfaces';
 })
 export class RecipesFilterComponent {
   @Input() categories!: TCategory[];
+  @Input() selectedCategory!: string;
 
-  @Output() changeCategory: EventEmitter<any> = new EventEmitter();
+  @Output() changeCategory = new EventEmitter();
 
-  selectCategory(category: any) {
+  selectCategory(category: TCategory) {
     this.changeCategory.emit(category.name);
   }
 }
