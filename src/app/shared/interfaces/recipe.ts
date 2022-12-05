@@ -1,4 +1,4 @@
-export type TCategory = { name: string; _id: number };
+export type TCategory = { name: string; _id: string };
 
 export type TComment = {
   comment: string;

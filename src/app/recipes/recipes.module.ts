@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { RecipeService } from './recipes.service';
 import { RecipesComponent } from './recipesComponent/recipes.cmpt';
 import { RecipeDetailsComponent } from './recipeDetailsComponent/recipeDetails.cmpt';
+import { RecipesFilterComponent } from './recipesFilterComponent/recipesFilter.cmpt';
 
 @NgModule({
   imports: [
@@ -14,7 +15,11 @@ import { RecipeDetailsComponent } from './recipeDetailsComponent/recipeDetails.c
       { path: 'recipes/:id', component: RecipeDetailsComponent },
     ]),
   ],
-  declarations: [RecipesComponent, RecipeDetailsComponent],
+  declarations: [
+    RecipesComponent,
+    RecipeDetailsComponent,
+    RecipesFilterComponent,
+  ],
   providers: [RecipeService],
   exports: [RecipesComponent],
 })

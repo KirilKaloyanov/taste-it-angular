@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { TRecipe } from 'src/app/shared/interfaces';
-
+import { TCategory, TRecipe } from 'src/app/shared/interfaces';
 import { RecipeService } from '../recipes.service';
 
 @Component({
@@ -8,16 +7,22 @@ import { RecipeService } from '../recipes.service';
   templateUrl: './recipes.cmpt.html',
 })
 export class RecipesComponent {
-  recipes!: TRecipe[];
   constructor(private recipeService: RecipeService) {}
 
+  recipes!: TRecipe[];
+  categories: TCategory[] = [{ _id: '1', name: 'All Categories' }];
+  selectedCategory: string = 'All Categories';
+
   ngOnInit() {
-    // this.recipeService.getRecipes().then((recipes) => {
-    //   this.recipes = recipes;
-    //   console.log(this.recipes);
-    // });
     this.recipeService.getRecipes().subscribe((recipes) => {
       this.recipes = recipes;
+      this.recipeService
+        .getCategories()
+        .subscribe((categories: TCategory[]) => {
+          categories
+            .filter((c) => this.recipes.some((r) => r.category.name === c.name))
+            .map((c) => this.categories.push(c));
+        });
       this.getRecipeLikesCount();
     });
   }
@@ -27,5 +32,9 @@ export class RecipesComponent {
       r.likes = r.likes.filter((rl) => rl.like === true);
       return r;
     });
+  }
+
+  setSelectedCategory(category: any) {
+    this.selectedCategory = category;
   }
 }
