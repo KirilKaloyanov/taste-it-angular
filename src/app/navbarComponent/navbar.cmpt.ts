@@ -5,4 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './navbar.cmpt.html',
   styleUrls: ['./navbar.cmpt.css'],
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+  activeLink: string = '';
+
+  onClick(e: any) {
+    this.activeLink = e.target.textContent;
+  }
+}

@@ -1,8 +1,14 @@
-<div class="navbar_container">
+<div class="navbar_container" (click)="onClick($event)">
   <a routerLink="/"><img src="../../assets/img/logo.jpg" /></a>
   <ul>
-    <li><a routerLink="/recipes">Recipes</a></li>
-    <li><a routerLink="">Login</a></li>
-    <li><a routerLink="">Register</a></li>
+    <li [class.active]="activeLink == 'Recipes'">
+      <a routerLink="/recipes">Recipes</a>
+    </li>
+    <li [class.active]="activeLink == 'Login'">
+      <a routerLink="">Login</a>
+    </li>
+    <li [class.active]="activeLink == 'Register'">
+      <a routerLink="">Register</a>
+    </li>
   </ul>
 </div>
