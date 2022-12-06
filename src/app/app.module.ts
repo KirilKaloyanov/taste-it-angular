@@ -5,15 +5,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { RecipesModule } from './recipes/recipes.module';
+import { UsersModule } from './users/user.module';
 
 import { AppComponent } from './app.cmpt';
 import { HomeComponent } from './homeComponent/home.cmpt';
 import { NavbarComponent } from './navbarComponent/navbar.cmpt';
-// import { RecipeService } from './recipes.service';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, NavbarComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, RecipesModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    RecipesModule,
+    UsersModule,
+  ],
   providers: [], //RecipeService
   bootstrap: [AppComponent],
 })

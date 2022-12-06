@@ -21,6 +21,6 @@ import { RecipesFilterComponent } from './recipesFilterComponent/recipesFilter.c
     RecipesFilterComponent,
   ],
   providers: [RecipeService],
-  exports: [RecipesComponent],
+  exports: [],
 })
 export class RecipesModule {}
