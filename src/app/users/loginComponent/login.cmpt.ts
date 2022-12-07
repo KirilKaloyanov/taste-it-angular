@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NgModel, NgForm } from '@angular/forms';
+import { UsersService } from './../users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'login',
@@ -7,7 +8,12 @@ import { NgModel, NgForm } from '@angular/forms';
   styleUrls: ['./login.cmpt.css'],
 })
 export class LoginComponent {
-  submit(e: any) {
-    console.log(e.value);
+  constructor(private usersService: UsersService) {}
+
+  submit(user: any) {
+    const result = this.usersService.login(user);
+    if (result) {
+      console.log('success');
+    } else console.log('failure');
   }
 }

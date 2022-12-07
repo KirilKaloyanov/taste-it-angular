@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './loginComponent/login.cmpt';
+import { UsersService } from './users.service';
 
 @NgModule({
   imports: [
@@ -11,7 +12,7 @@ import { LoginComponent } from './loginComponent/login.cmpt';
     RouterModule.forChild([{ path: 'login', component: LoginComponent }]),
   ],
   declarations: [LoginComponent],
-  providers: [],
+  providers: [UsersService],
   exports: [],
 })
 export class UsersModule {}
