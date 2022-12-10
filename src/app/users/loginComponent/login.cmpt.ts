@@ -11,9 +11,10 @@ export class LoginComponent {
   constructor(private usersService: UsersService) {}
 
   submit(user: any) {
-    const result = this.usersService.login(user);
-    if (result) {
-      console.log('success');
-    } else console.log('failure');
+    this.usersService.login(user).subscribe({
+      next: (res) => console.log('success'),
+      error: (err) => console.log('failure')
+    });
+
   }
 }

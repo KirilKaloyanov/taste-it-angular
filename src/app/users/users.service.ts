@@ -9,14 +9,17 @@ export class UsersService {
   constructor(private http: HttpClient) {}
 
   login(user: any) {
-    return this.http
-      .post<any>(this.host + '/auth', user)
-      .subscribe((response) => {
-        if (response && response.token) {
-          sessionStorage.setItem('token', response.token);
-          sessionStorage.setItem('username', user.username);
-          return true;
-        } else return false;
-      });
+    return this.http.post<any>(this.host + '/auth', user);
   }
+  // login(user: any) {
+  //   return this.http
+  //     .post<any>(this.host + '/auth', user)
+  //     .subscribe((response) => {
+  //       if (response && response.token) {
+  //         sessionStorage.setItem('token', response.token);
+  //         sessionStorage.setItem('username', user.username);
+  //         return true;
+  //       } else return false;
+  //     });
+  // }
 }
