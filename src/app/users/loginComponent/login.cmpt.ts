@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
   selector: 'login',
   templateUrl: './login.cmpt.html',
   styleUrls: ['./login.cmpt.css'],
-  // providers: [UsersService]
 })
 export class LoginComponent {
   constructor(private usersService: UsersService, private router: Router) {}
@@ -14,17 +13,14 @@ export class LoginComponent {
   errors!: string;
 
   submit(f: any) {
-    const user = f.value
-    if (f.invalid){
-      this.errors = 'All fields are required'
-      return
+    const user = f.value;
+    if (f.invalid) {
+      this.errors = 'All fields are required';
+      return;
     }
     this.usersService.login(user).subscribe({
       next: () => this.router.navigate(['/']),
-      error: (err) => this.errors = err.error.message
+      error: (err) => (this.errors = err.error.message),
     });
-
   }
-
-
 }

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
+import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
 import { RecipesModule } from './recipes/recipes.module';
@@ -15,7 +15,7 @@ import { NavbarComponent } from './navbarComponent/navbar.cmpt';
   declarations: [AppComponent, HomeComponent, NavbarComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    RouterModule.forRoot([{ path: '', component: HomeComponent }]),
     HttpClientModule,
     RecipesModule,
     UsersModule,

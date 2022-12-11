@@ -13,17 +13,21 @@
       <a
         routerLink="/recipes"
         [routerLinkActive]="'active'"
-        [routerLinkActiveOptions]="{exact: true}"
         >Recipes</a
       >
     </li>
-    <li>
-      <a routerLink="/login" [routerLinkActive]="'active'">Login</a>
-    </li>
-    <li>
-      <a routerLink="/register" [routerLinkActive]="'active'">Register</a>
-    </li>
+    <ng-container *ngIf="user == null">
+      <li>
+        <a routerLink="/login" [routerLinkActive]="'active'">Login</a>
+      </li>
+      <li>
+        <a routerLink="/register" [routerLinkActive]="'active'">Register</a>
+      </li>
+    </ng-container>
+    <ng-container  *ngIf="user != null">
+      <li>
+        <a routerLink="/logout">Logout</a>
+      </li>
+    </ng-container>
   </ul>
 </div>
-
-

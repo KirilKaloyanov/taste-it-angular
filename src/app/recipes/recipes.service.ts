@@ -11,11 +11,15 @@ export class RecipeService {
     return this.http.get<any>(`${this.host}/recipes`);
   }
 
+  getCategories() {
+    return this.http.get<any>(`${this.host}/categories`);
+  }
+
   getSingleRecipe(id: number) {
     return this.http.get<any>(this.host + '/recipes/' + id);
   }
 
-  getCategories() {
-    return this.http.get<any>(`${this.host}/categories`);
+  getUserRecipes(userId: string) {
+    return this.http.get(this.host + '/recipes/users' + userId)
   }
 }

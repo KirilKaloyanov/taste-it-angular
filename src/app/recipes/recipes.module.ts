@@ -6,6 +6,7 @@ import { RecipeService } from './recipes.service';
 import { RecipesComponent } from './recipesComponent/recipes.cmpt';
 import { RecipeDetailsComponent } from './recipeDetailsComponent/recipeDetails.cmpt';
 import { RecipesFilterComponent } from './recipesFilterComponent/recipesFilter.cmpt';
+import { UserRecipes } from './userRecipes/userRecipesComponent/userRecipes.cmpt';
 
 @NgModule({
   imports: [
@@ -13,12 +14,14 @@ import { RecipesFilterComponent } from './recipesFilterComponent/recipesFilter.c
     RouterModule.forChild([
       { path: 'recipes', component: RecipesComponent },
       { path: 'recipes/:id', component: RecipeDetailsComponent },
+      { path: 'recipes/user/:userId', component: UserRecipes },
     ]),
   ],
   declarations: [
     RecipesComponent,
     RecipeDetailsComponent,
     RecipesFilterComponent,
+    UserRecipes
   ],
   providers: [RecipeService],
   exports: [],

@@ -9,17 +9,14 @@ import { UsersService } from '../users/users.service';
   styleUrls: ['./navbar.cmpt.css'],
 })
 export class NavbarComponent {
-  activeLink: string = '';
-
-  public loggedInUser$!: Observable<{username: string} | null>;
+  user!: null | string;
+  // public loggedInUser$!: Observable<{username: string} | null>;
 
   constructor(private usersService: UsersService, private router: Router) {}
 
-  ngOnInit() {
-    this.loggedInUser$ = this.usersService.getLoggedUser();
-    this.loggedInUser$.subscribe(result => console.log(result));
+  ngDoCheck() {
+    // this.loggedInUser$ = this.usersService.getLoggedUser();
+    this.user = this.usersService.getUsername();
   }
-
-
 
 }
