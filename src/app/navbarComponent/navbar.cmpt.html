@@ -1,14 +1,29 @@
-<div class="navbar_container" (click)="onClick($event)">
-  <a routerLink="/"><img src="../../assets/img/logo.jpg" /></a>
+<img src="../../assets/img/logo.jpg" />
+<div class="navbar_container">
   <ul>
-    <li [class.active]="activeLink == 'Recipes'">
-      <a routerLink="/recipes">Recipes</a>
+    <li>
+      <a
+        routerLink="/"
+        [routerLinkActive]="'active'"
+        [routerLinkActiveOptions]="{exact: true}"
+        >Home</a
+      >
     </li>
-    <li [class.active]="activeLink == 'Login'">
-      <a routerLink="/login">Login</a>
+    <li>
+      <a
+        routerLink="/recipes"
+        [routerLinkActive]="'active'"
+        [routerLinkActiveOptions]="{exact: true}"
+        >Recipes</a
+      >
     </li>
-    <li [class.active]="activeLink == 'Register'">
-      <a routerLink="/register">Register</a>
+    <li>
+      <a routerLink="/login" [routerLinkActive]="'active'">Login</a>
+    </li>
+    <li>
+      <a routerLink="/register" [routerLinkActive]="'active'">Register</a>
     </li>
   </ul>
 </div>
+
+

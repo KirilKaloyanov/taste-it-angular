@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UsersService } from '../users/users.service';
 
@@ -12,7 +13,7 @@ export class NavbarComponent {
 
   public loggedInUser$!: Observable<{username: string} | null>;
 
-  constructor(private usersService: UsersService) {}
+  constructor(private usersService: UsersService, private router: Router) {}
 
   ngOnInit() {
     this.loggedInUser$ = this.usersService.getLoggedUser();
@@ -20,7 +21,5 @@ export class NavbarComponent {
   }
 
 
-  onClick(e: any) {
-    this.activeLink = e.target.textContent;
-  }
+
 }
