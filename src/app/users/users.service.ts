@@ -38,6 +38,9 @@ export class UsersService {
   getUsername(): null | string {
     return sessionStorage.getItem('username');
   }
+  getUserId(): null | string {
+    return sessionStorage.getItem('userId');
+  }
 
   setUser(token: string) {
     const user: {username: string, _id: string} = jwtDecode(token);

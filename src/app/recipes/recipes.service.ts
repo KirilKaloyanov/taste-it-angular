@@ -20,6 +20,6 @@ export class RecipeService {
   }
 
   getUserRecipes(userId: string) {
-    return this.http.get(this.host + '/recipes/users' + userId)
+    return this.http.get(this.host + '/recipes/users/' + userId)
   }
 }

@@ -10,6 +10,7 @@ import { UsersService } from '../users/users.service';
 })
 export class NavbarComponent {
   user!: null | string;
+  userId!: null | string;
   // public loggedInUser$!: Observable<{username: string} | null>;
 
   constructor(private usersService: UsersService, private router: Router) {}
@@ -17,6 +18,7 @@ export class NavbarComponent {
   ngDoCheck() {
     // this.loggedInUser$ = this.usersService.getLoggedUser();
     this.user = this.usersService.getUsername();
+    this.userId = this.usersService.getUserId();
   }
 
 }
