@@ -12,7 +12,7 @@ import { UsersService } from './users.service';
     RouterModule.forChild([{ path: 'login', component: LoginComponent }]),
   ],
   declarations: [LoginComponent],
-  providers: [UsersService],
+  providers: [],
   exports: [],
 })
 export class UsersModule {}

@@ -11,13 +11,6 @@
   <input class="btn btn-primary" type="submit" value="Log In"/>
   <ng-container>
     <div class="alert alert-warning mt-3" *ngIf="errors">{{errors}}</div>
-    <div 
-      class="alert alert-warning mt-3" 
-      *ngIf="(username.touched && username.invalid)
-        || (password.touched && password.invalid)"
-    >
-      All fields are required
-    </div>
   </ng-container>
 
 </form>

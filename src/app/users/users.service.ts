@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 import { apiEndpoint } from '../shared/apiEndpoint';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UsersService {
   host = apiEndpoint;
+  private loggedInUser$ = new BehaviorSubject<{username: string} | null>(null);
+
   constructor(private http: HttpClient) {}
 
   login(user: any) {
@@ -15,8 +19,12 @@ export class UsersService {
       .pipe(tap((response) => {
         if (response.token) {
           sessionStorage.setItem('token', response.token);
-          sessionStorage.setItem('username', user.username);
+          this.loggedInUser$.next(user.username);
         } 
       }));
+  }
+
+  public getLoggedUser(): Observable<{username: string} | null> {
+    return this.loggedInUser$;
   }
 }

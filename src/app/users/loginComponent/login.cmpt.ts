@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
   selector: 'login',
   templateUrl: './login.cmpt.html',
   styleUrls: ['./login.cmpt.css'],
+  // providers: [UsersService]
 })
 export class LoginComponent {
   constructor(private usersService: UsersService, private router: Router) {}
