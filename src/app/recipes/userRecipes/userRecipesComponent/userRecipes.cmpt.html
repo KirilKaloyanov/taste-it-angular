@@ -1,1 +1,15 @@
-cmpo work
+<ul class="list-group list-group-flush">
+    <ng-container *ngFor="let recipe of userRecipes">
+      <li
+        class="list-group-item d-flex justify-content-between"
+      >
+        <span>
+          <a [routerLink]="['/recipes', recipe._id]">{{ recipe.name }}</a>
+          <span class="badge rounded-pill p-2 m-2 cursor-pointer bg-secondary"
+            >{{ recipe.category.name }}</span
+          >
+        </span>
+        <span class="px-3 m-1 d-flex">{{ recipe.likes.length }}</span>
+      </li>
+    </ng-container>
+  </ul>

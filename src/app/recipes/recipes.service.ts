@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { apiEndpoint } from '../shared/apiEndpoint';
 @Injectable()
@@ -20,6 +21,6 @@ export class RecipeService {
   }
 
   getUserRecipes(userId: string) {
-    return this.http.get(this.host + '/recipes/users/' + userId)
+    return this.http.get<any>(this.host + '/recipes/users/' + userId)
   }
 }
