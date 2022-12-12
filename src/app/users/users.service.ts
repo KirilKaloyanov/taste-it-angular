@@ -41,6 +41,9 @@ export class UsersService {
   getUserId(): null | string {
     return sessionStorage.getItem('userId');
   }
+  getToken(): null | string {
+    return sessionStorage.getItem('token');
+  }
 
   setUser(token: string) {
     const user: {username: string, _id: string} = jwtDecode(token);
