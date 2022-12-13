@@ -13,7 +13,6 @@
       <a
         routerLink="/recipes"
         [routerLinkActive]="'active'"
-        [routerLinkActiveOptions]="{exact: true}"
         >Recipes</a
       >
     </li>
@@ -28,7 +27,7 @@
     <ng-container *ngIf="user != null">
       <li>
         <a
-          [routerLink]="'/recipes/user/' + userId"
+          [routerLink]="'/user/' + userId"
           [routerLinkActive]="'active'"
           >Your Recipes</a
         >

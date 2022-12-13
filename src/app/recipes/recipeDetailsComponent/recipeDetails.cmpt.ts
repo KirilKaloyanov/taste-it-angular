@@ -6,7 +6,7 @@ import { TLike, TRecipe } from 'src/app/shared/interfaces';
 @Component({
   selector: 'recipe',
   templateUrl: './recipeDetails.cmpt.html',
-  styleUrls: ['./recipeDetails.cmpt.css'],
+  styles: ['h2 {text-align: center;}']
 })
 export class RecipeDetailsComponent {
   recipe!: TRecipe;

@@ -5,11 +5,12 @@ import { RecipeService } from '../recipes.service';
 @Component({
   selector: 'recipes',
   templateUrl: './recipes.cmpt.html',
+  styles: ['h2 {text-align: center;}']
 })
 export class RecipesComponent {
   constructor(private recipeService: RecipeService) {}
 
-  recipes!: TRecipe[];
+  recipes: TRecipe[] | [] = [];
   categories: TCategory[] = [{ _id: '1', name: 'All Categories' }];
   selectedCategory: string = 'All Categories';
 

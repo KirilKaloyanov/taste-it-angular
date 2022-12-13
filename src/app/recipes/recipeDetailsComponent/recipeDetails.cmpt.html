@@ -1,9 +1,18 @@
+<ng-container>
+  <h2 *ngIf="!recipe">Loading ...</h2>
+</ng-container>
 <div *ngIf="recipe">
   <h2>{{recipe.name}}</h2>
   <span class="badge rounded-pill p-2 m-2 bg-info"
     >{{recipe.category.name}}
   </span>
-  <span>Likes: {{recipeLikes.length}}</span>
+  <span
+    ><i
+      class="bi bi-heart-fill m-1"
+      style="font-size: 1rem; color: rgb(211, 7, 7)"
+    ></i>
+    {{recipeLikes.length}}</span
+  >
   <h5>Number of servings: {{recipe.numberOfServings}}</h5>
   <ul>
     <li *ngFor="let i of recipe.ingredients">{{i.ingredient}}</li>

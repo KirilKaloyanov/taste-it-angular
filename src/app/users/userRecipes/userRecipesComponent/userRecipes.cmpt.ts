@@ -1,20 +1,20 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { TRecipe } from "src/app/shared/interfaces";
-import { RecipeService } from "../../recipes.service";
+import { UserRecipeService } from "../../userRecipes.service";
 
 @Component({
     selector: 'user-recipes',
     templateUrl: './userRecipes.cmpt.html'
 })
 export class UserRecipes implements OnInit{
-    constructor(private activatedRoute: ActivatedRoute, private recipeService: RecipeService) {}
+    constructor(private activatedRoute: ActivatedRoute, private userRecipeService: UserRecipeService) {}
 
     userRecipes!: TRecipe[];
 
+    userId = this.activatedRoute.snapshot.params['userId'];
     ngOnInit(): void {
-        const userId = this.activatedRoute.snapshot.params['userId'];
-        this.recipeService.getUserRecipes(userId).subscribe({
+        this.userRecipeService.getUserRecipes(this.userId).subscribe({
             next: recipes => this.userRecipes = recipes,
             error: err => console.log(err)
         });
