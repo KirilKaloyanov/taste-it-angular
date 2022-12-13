@@ -2,15 +2,32 @@
 <form #f="ngForm" (ngSubmit)="submit(f)" class="formContainer">
   <div class="mb-3">
     <label class="form-label" for="username">Username: </label>
-    <input #username="ngModel" ngModel class="form-control" type="text" name="username" required />
+    <input
+      class="form-control"
+      type="text"
+      name="username"
+      required
+      ngModel
+      #username="ngModel"
+      (input)="onInput()"
+    />
   </div>
   <div class="mb-3">
     <label class="form-label" for="passsword">Password: </label>
-    <input #password="ngModel" ngModel class="form-control" type="password" name="password" required />
+    <input
+      class="form-control"
+      type="password"
+      name="password"
+      required
+      ngModel
+      #password="ngModel"
+      (input)="onInput()"
+    />
   </div>
-  <input class="btn btn-primary" type="submit" value="Log In"/>
+  <button class="btn btn-primary" type="submit" [disabled]="!!errors">
+    {{submitBtnText}}
+  </button>
   <ng-container>
     <div class="alert alert-warning mt-3" *ngIf="errors">{{errors}}</div>
   </ng-container>
-
 </form>

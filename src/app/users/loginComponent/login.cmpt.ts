@@ -10,17 +10,27 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   constructor(private usersService: UsersService, private router: Router) {}
 
-  errors!: string;
+  errors: string | null = null;
+  submitBtnText: string = 'Log In';
+
+  onInput() {
+    this.errors = null;
+  }
 
   submit(f: any) {
+    this.submitBtnText = 'Log in ...'
     const user = f.value;
     if (f.invalid) {
+      this.submitBtnText = 'Log In';
       this.errors = 'All fields are required';
       return;
     }
     this.usersService.login(user).subscribe({
       next: () => this.router.navigate(['/']),
-      error: (err) => (this.errors = err.error.message),
+      error: (err) => {
+        this.submitBtnText = 'Log In';
+        this.errors = err.error.message;
+      }
     });
   }
 }
