@@ -1,5 +1,8 @@
+<h2>Your Recipes</h2>
+<ng-container *ngIf="userRecipes.length == 0">Loading recipes ... </ng-container>
+
 <ul class="list-group list-group-flush">
-    <ng-container *ngFor="let recipe of userRecipes">
+  <ng-container *ngFor="let recipe of userRecipes">
       <li
         class="list-group-item d-flex justify-content-between"
       >
@@ -12,4 +15,4 @@
         <span class="px-3 m-1 d-flex">{{ recipe.likes.length }}</span>
       </li>
     </ng-container>
-  </ul>
+    </ul>

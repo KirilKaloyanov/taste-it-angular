@@ -5,12 +5,13 @@ import { UserRecipeService } from "../../userRecipes.service";
 
 @Component({
     selector: 'user-recipes',
-    templateUrl: './userRecipes.cmpt.html'
+    templateUrl: './userRecipes.cmpt.html',
+    styles: ['h2 {text-align: center;}']
 })
 export class UserRecipes implements OnInit{
     constructor(private activatedRoute: ActivatedRoute, private userRecipeService: UserRecipeService) {}
 
-    userRecipes!: TRecipe[];
+    userRecipes: TRecipe[] | [] = [];
 
     userId = this.activatedRoute.snapshot.params['userId'];
     ngOnInit(): void {

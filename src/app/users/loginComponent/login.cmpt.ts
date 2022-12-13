@@ -18,7 +18,7 @@ export class LoginComponent {
   }
 
   submit(f: any) {
-    this.submitBtnText = 'Log in ...'
+    this.submitBtnText = 'Logging in ...'
     const user = f.value;
     if (f.invalid) {
       this.submitBtnText = 'Log In';

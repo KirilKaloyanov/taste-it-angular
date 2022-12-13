@@ -22,3 +22,12 @@
   </ol>
   <em>Created by: {{recipe.userId.username}}</em>
 </div>
+<ng-container *ngIf="recipe && recipe.comments.length > 0">
+  <ng-container *ngFor="let comment of recipe.comments">
+    <div class="border border-secondary rounded p-2 my-3">
+      <div>{{comment.comment}}</div>
+      <br /> 
+      <em>{{comment.user}}, {{somestring(comment.createdAt)}}</em>
+    </div>
+  </ng-container>
+</ng-container>

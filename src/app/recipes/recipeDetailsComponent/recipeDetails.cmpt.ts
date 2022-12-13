@@ -24,4 +24,9 @@ export class RecipeDetailsComponent {
       this.recipeLikes = this.recipe.likes.filter((rl) => rl.like === true);
     });
   }
+
+  somestring(aDate: Date){
+    let d = new Date(aDate);
+    return d.toDateString() + ', ' + d.toLocaleTimeString();
+  }
 }
