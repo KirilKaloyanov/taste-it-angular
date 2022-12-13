@@ -3,12 +3,11 @@
 invalidToken -> 400 ({message: Invalid token})   
 
 /routes/auth.js
-post-auth/ !user -> 400 ({message: 'Invalid username or password'})
-post-auth/ !password -> 400 ({message: 'Invalid username or password'})
+**post-auth/ !user -> 400 ({message: 'Invalid username or password'})
+**post-auth/ !password -> 400 ({message: 'Invalid username or password'})
 
 /routes/recipes.js
 get-recipes/:recipeId -> 404 ({ message: 'Recipe not found', error: ex })
-get-recipes/users/:userId -> 0 ({ message: 'No recipes created yet' })
 get-recipes/users/:userId/:recipeId -> 403 ({ message: 'Access denied' }) 
                                     || 404 ({ message: 'Recipe not found', error: ex })
 
@@ -17,16 +16,18 @@ post-recipes/ -> 400 ({ message: "Invalid category" })
 put-recipes/:recipeId -> 400 ({ message: "Invalid category" })
                       || 404 ({ message: 'The recipe not found' })
                       || 400 (ex);
-put-recipes/:recipeId/new_comment -> 400 ({ message: 'Cannot save empty comment' })
+**put-recipes/:recipeId/new_comment -> 400 ({ message: 'Cannot save empty comment' })
                        || 400 (ex)
 put-recipes/:recipeId/like -> 400 (ex)
 delete-recipes/:recipeId -> 403 ({ message: 'Access denied' })
                          || 404 ({ message: 'Recipe not found', error: ex }) 
 
+/routes/users.js
+get-users/me -> 
+**post-users/ -> 400 ({ errors: {username: { message: 'Username is already registered' } } } )
+            || 400 (ex);
 
 
-
--users
 
 
 -categories

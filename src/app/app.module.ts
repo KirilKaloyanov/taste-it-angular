@@ -13,13 +13,16 @@ import { NavbarComponent } from './navbarComponent/navbar.cmpt';
 import { TokenInterceptor } from './shared/interceptors/tokenInterceptor';
 import { AuthGuard } from './shared/guards/authGuard';
 import { NotFoundComponent } from './notFoundComponent/not-found.component';
+import { ErrorComponent } from './errorComponent/error.cmpt';
+import { ErrorsInterceptor } from './shared/interceptors/errorsInterceptor';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NavbarComponent, NotFoundComponent],
+  declarations: [AppComponent, HomeComponent, NavbarComponent, NotFoundComponent, ErrorComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
+      { path: 'error', component: ErrorComponent },
       { path: '**', component: NotFoundComponent },
   ]),
     HttpClientModule,
@@ -32,7 +35,13 @@ import { NotFoundComponent } from './notFoundComponent/not-found.component';
       useClass: TokenInterceptor,
       multi: true
     },
-    AuthGuard
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorsInterceptor,
+      multi: true
+    },
+    AuthGuard,
+    ErrorComponent
   ], //RecipeService
   bootstrap: [AppComponent],
 })
