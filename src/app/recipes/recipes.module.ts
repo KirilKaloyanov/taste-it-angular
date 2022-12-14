@@ -9,6 +9,7 @@ import { RecipesFilterComponent } from './recipesFilterComponent/recipesFilter.c
 import { RecipeCommentComponent } from './recipeCommentComponent/recipeComment.cmpt';
 import { UsersService } from '../users/users.service';
 import { FormsModule } from '@angular/forms';
+import { RecipeLikeComponent } from './recipeLikeComponent/recipeLike.cmpt';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { FormsModule } from '@angular/forms';
     RecipeDetailsComponent,
     RecipesFilterComponent,
     RecipeCommentComponent,
+    RecipeLikeComponent
   ],
   providers: [RecipeService, UsersService],
   exports: [],

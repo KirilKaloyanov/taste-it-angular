@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { RecipeService } from '../recipes.service';
 
 @Component({
@@ -21,7 +20,7 @@ export class RecipeCommentComponent {
   @Input('recipeId') recipeId!: number;
   @Input('renderRecipe') renderRecipe!: any; 
 
-  constructor(private recipeService: RecipeService, private router: Router) {}
+  constructor(private recipeService: RecipeService) {}
 
   submitComment(form: any) {
     if (form.value.commentText == '') {
