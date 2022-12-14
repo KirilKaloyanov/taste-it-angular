@@ -23,4 +23,8 @@ export class RecipeService {
     return this.http.get<any>(this.host + '/recipes/' + id);
   }
 
+  postComment(id: number, data: string) {
+    return this.http.put<any>(this.host + '/recipes/' + id + '/new_comment', {comment: data})
+  }
+
 }

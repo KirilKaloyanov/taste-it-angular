@@ -25,12 +25,14 @@ export class RecipeDetailsComponent {
     this.userId = this.usersService.getUserId();
     const recipeId = this.activatedRoute.snapshot.params['id'];
     this.recipeService.getSingleRecipe(recipeId).subscribe({
-      next: (recipe) => {
-        this.recipe = recipe;
-        this.recipeLikes = this.recipe.likes.filter((rl) => rl.like === true);
-      },
+      next: (response) => this.renderRecipe(response),
       error: (error) => console.log(error),
     });
+  }
+
+  renderRecipe = (recipe: TRecipe) => {
+    this.recipe = recipe;
+    this.recipeLikes = this.recipe.likes.filter((rl) => rl.like === true);
   }
 
   datestring(aDate: Date) {
