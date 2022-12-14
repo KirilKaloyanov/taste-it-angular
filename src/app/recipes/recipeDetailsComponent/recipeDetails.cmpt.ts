@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeService } from '../recipes.service';
 import { TLike, TRecipe } from 'src/app/shared/interfaces';
+import { UsersService } from 'src/app/users/users.service';
 
 @Component({
   selector: 'recipe',
@@ -9,17 +10,21 @@ import { TLike, TRecipe } from 'src/app/shared/interfaces';
   styles: ['h2 {text-align: center;}'],
 })
 export class RecipeDetailsComponent {
+  
+    constructor(
+      private recipeService: RecipeService,
+      private usersService: UsersService,
+      private activatedRoute: ActivatedRoute
+    ) {}
+  
   recipe!: TRecipe;
   recipeLikes!: TLike[];
-
-  constructor(
-    private recipeService: RecipeService,
-    private activatedRoute: ActivatedRoute
-  ) {}
+  userId!: string | null;
 
   ngOnInit() {
-    const id = this.activatedRoute.snapshot.params['id'];
-    this.recipeService.getSingleRecipe(id).subscribe({
+    this.userId = this.usersService.getUserId();
+    const recipeId = this.activatedRoute.snapshot.params['id'];
+    this.recipeService.getSingleRecipe(recipeId).subscribe({
       next: (recipe) => {
         this.recipe = recipe;
         this.recipeLikes = this.recipe.likes.filter((rl) => rl.like === true);
@@ -28,7 +33,7 @@ export class RecipeDetailsComponent {
     });
   }
 
-  somestring(aDate: Date) {
+  datestring(aDate: Date) {
     let d = new Date(aDate);
     return d.toDateString() + ', ' + d.toLocaleTimeString();
   }

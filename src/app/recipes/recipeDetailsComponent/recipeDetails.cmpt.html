@@ -27,7 +27,8 @@
     <div class="border border-secondary rounded p-2 my-3">
       <div>{{comment.comment}}</div>
       <br /> 
-      <em>{{comment.user}}, {{somestring(comment.createdAt)}}</em>
+      <em>{{comment.user}}, {{datestring(comment.createdAt)}}</em>
     </div>
   </ng-container>
 </ng-container>
+<recipe-comment *ngIf="recipe && userId" [recipeId]="recipe._id"></recipe-comment>

@@ -18,7 +18,7 @@ export class LoginComponent {
     this.errors = null;
   }
 
-  submit(f: AbstractControlDirective) {
+  submit(f: any) {
     this.submitBtnText = 'Logging in ...'
     const user = f.value;
     if (f.invalid) {

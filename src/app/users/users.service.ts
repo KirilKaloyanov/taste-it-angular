@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import jwtDecode from 'jwt-decode';
 
@@ -10,19 +10,19 @@ import { apiEndpoint } from '../shared/apiEndpoint';
 })
 export class UsersService {
   host = apiEndpoint;
-  // private loggedInUser$ = new BehaviorSubject<{username: string} | null>(null);
 
   constructor(private http: HttpClient) {}
 
   login(user: any) {
     return this.http
       .post<any>(this.host + '/auth', user)
-      .pipe(tap((response) => {
-        if (response.token) {
-          this.setUser(response.token);
-          // this.loggedInUser$.next(user.username);
-        } 
-      }));
+      .pipe(tap(response => this.setUser(response)
+      ));
+  }
+
+  register(user: any) {
+    return this.http
+      .post<any>(this.host + '/users', user)
   }
 
   logout() {
@@ -30,10 +30,6 @@ export class UsersService {
     sessionStorage.removeItem('username');
     sessionStorage.removeItem('userId');
   }
-
-  // public getLoggedUser(): Observable<{username: string} | null> {
-  //   return this.loggedInUser$;
-  // }
 
   getUsername(): null | string {
     return sessionStorage.getItem('username');
@@ -45,9 +41,9 @@ export class UsersService {
     return sessionStorage.getItem('token');
   }
 
-  setUser(token: string) {
-    const user: {username: string, _id: string} = jwtDecode(token);
-    sessionStorage.setItem('token', token);
+  setUser(response: any) {
+    const user: {username: string, _id: string} = jwtDecode(response.token);
+    sessionStorage.setItem('token', response.token);
     sessionStorage.setItem('username', user.username);
     sessionStorage.setItem('userId', user._id);
   }
