@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -20,6 +21,7 @@ import { ErrorsInterceptor } from './shared/interceptors/errorsInterceptor';
   declarations: [AppComponent, HomeComponent, NavbarComponent, NotFoundComponent, ErrorComponent],
   imports: [
     BrowserModule,
+    CommonModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'error', component: ErrorComponent },
@@ -41,7 +43,7 @@ import { ErrorsInterceptor } from './shared/interceptors/errorsInterceptor';
       multi: true
     },
     AuthGuard,
-    ErrorComponent
+    // ErrorComponent
   ], //RecipeService
   bootstrap: [AppComponent],
 })

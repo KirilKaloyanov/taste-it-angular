@@ -8,6 +8,7 @@ invalidToken -> 400 ({message: Invalid token})
 
 /routes/recipes.js
 get-recipes/:recipeId -> 404 ({ message: 'Recipe not found', error: ex })
+get-recipes/users/:userId -> [auth]
 get-recipes/users/:userId/:recipeId -> 403 ({ message: 'Access denied' }) 
                                     || 404 ({ message: 'Recipe not found', error: ex })
 

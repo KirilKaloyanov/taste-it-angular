@@ -1,10 +1,10 @@
-import { Component, Injectable } from '@angular/core';
+import { Component } from '@angular/core';
 import { RecipeService } from '../recipes/recipes.service';
 
 @Component({
     selector: 'error',
     templateUrl: './error.cmpt.html',
-    styles: []
+    styles: ['h2 {text-align: center;}'] 
 })
 export class ErrorComponent {
 
@@ -12,15 +12,4 @@ export class ErrorComponent {
 
     error$$ = this.recipeService.error$$;
     
-    
-    ngOnInit() {
-        this.error$$.subscribe({
-            next: (e) => {console.log('next', e)},
-            // error: err => {
-            //     console.log(err);
-            //     console.log(err);
-            // }
-        });
-        console.log(this.error$$);
-    }
 }

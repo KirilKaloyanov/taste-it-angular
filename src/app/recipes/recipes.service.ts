@@ -20,7 +20,6 @@ export class RecipeService {
   }
 
   getSingleRecipe(id: number) {
-    console.log('2.getSingleRecipe called')
     return this.http.get<any>(this.host + '/recipes/' + id);
   }
 

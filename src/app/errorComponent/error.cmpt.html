@@ -1,2 +1,5 @@
-smth went wrong
-{{error$$ | async}}
+<h2>
+    <ng-container *ngIf="(error$$ | async) != null">
+        {{error$$ | async }}
+    </ng-container>
+</h2>
