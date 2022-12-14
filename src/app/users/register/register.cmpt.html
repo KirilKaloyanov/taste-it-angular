@@ -1,0 +1,44 @@
+<h2>Register</h2>
+<form class="formContainer" #f="ngForm" (submit)="submit(f)">
+  <div class="mb-3">
+    <label for="username" class="form-label">Username</label>
+    <input
+      type="text"
+      class="form-control"
+      name="username"
+      required
+      minlength="5"
+      ngModel
+      #username="ngModel"
+      (input)="onInput()"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      name="password"
+      required
+      minlength="5"
+      ngModel
+      #password="ngModel"
+      (input)="onInput()"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="repass" class="form-label">Repeat Password</label>
+    <input
+      type="password"
+      class="form-control"
+      name="repass"
+      ngModel
+      #repass="ngModel"
+      (input)="onInput()"
+    />
+  </div>
+  <button class="btn btn-primary">{{submitBtnText}}</button>
+  <ng-container *ngIf="errors != null">
+    <div class="alert alert-warning mt-3">{{errors}}</div>
+  </ng-container>
+</form>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AbstractControlDirective } from '@angular/forms';
 import { UsersService } from './../users.service';
 import { Router } from '@angular/router';
 
@@ -17,7 +18,7 @@ export class LoginComponent {
     this.errors = null;
   }
 
-  submit(f: any) {
+  submit(f: AbstractControlDirective) {
     this.submitBtnText = 'Logging in ...'
     const user = f.value;
     if (f.invalid) {
