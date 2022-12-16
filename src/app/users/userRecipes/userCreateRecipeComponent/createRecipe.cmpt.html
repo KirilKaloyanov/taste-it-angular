@@ -3,7 +3,14 @@
   <div class="mb-3">
     <label for="name">Title:</label>
     <input class="form-control" type="text" id="name" formControlName="name" />
+    <div
+      *ngIf="createForm.get('name')?.touched && createForm.get('name')?.errors?.['required']"
+      class="alert alert-danger"
+    >
+      Please, give your recipe a title.
+    </div>
   </div>
+
   <div class="mb-3">
     <label for="numberOfServings">Number Of Servings:</label>
     <input
@@ -12,16 +19,32 @@
       id="numberOfServings"
       formControlName="numberOfServings"
     />
+    <div
+      *ngIf="createForm.get('numberOfServings')?.touched 
+        && (createForm.get('numberOfServings')?.errors?.['required'] 
+        || createForm.get('numberOfServings')?.errors?.['negativeNumberOfServings'])"
+      class="alert alert-danger"
+    >
+      Please, enter a positive number of servings.
+    </div>
   </div>
+
   <div class="mb-3">
     <label>Category:</label>
-    <select id="categories" class="form-control">
+    <select id="categories" class="form-control" formControlName="category">
       <option></option>
       <ng-container *ngFor="let category of categories">
-        <option>{{category.name}}</option> </ng-container
-      >>
+        <option>{{category.name}}</option>
+      </ng-container>
     </select>
+    <div
+      *ngIf="createForm.get('category')?.touched && createForm.get('category')?.errors"
+      class="alert alert-danger"
+    >
+      Please, select a category.
+    </div>
   </div>
+
   <div formArrayName="ingredients" class="mb-3">
     <h5>Ingredients</h5>
     <ng-container
@@ -30,7 +53,7 @@
       <div class="mb-3 row">
         <div class="col-md-1 index"><strong>{{i + 1}}</strong></div>
         <div class="col-md-8">
-          <input class="form-control" type="text" [formGroupName]="i" />
+          <input class="form-control" type="text" [formControlName]="i"/>
         </div>
         <div class="col-md-3">
           <button
@@ -41,12 +64,26 @@
           </button>
         </div>
       </div>
+
+      <div
+      *ngIf="getItemFormsGroup('ingredients').controls[i].errors?.['required']
+        && getItemFormsGroup('ingredients').controls[i].touched"
+      class="alert alert-danger"
+    >
+      Please, provide an ingredient.
+    </div>
+
     </ng-container>
-    <button type="button" class="btn btn-success" (click)="addInput('ingredients')">
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="addInput('ingredients')"
+    >
       Add Indgredient
     </button>
   </div>
-  <div formArrayName="ingredients" class="mb-3">
+
+  <div formArrayName="methods" class="mb-3">
     <h5>Methods</h5>
     <ng-container
       *ngFor="let method of getItemFormsGroup('methods').controls; let i=index"
@@ -54,21 +91,31 @@
       <div class="mb-3 row">
         <div class="col-md-1 index"><strong>{{i + 1}}</strong></div>
         <div class="col-md-8">
-          <input class="form-control" type="text" [formGroupName]="i" />
+          <input class="form-control" type="text" [formControlName]="i" />
         </div>
         <div class="col-md-3">
-          <button
-            class="btn btn-danger"
-            (click)="deleteInput(i, 'methods')"
-          >
+          <button class="btn btn-danger" (click)="deleteInput(i, 'methods')">
             Remove
           </button>
         </div>
       </div>
+
+      <div
+      *ngIf="getItemFormsGroup('methods').controls[i].errors?.['required']
+        && getItemFormsGroup('methods').controls[i].touched"
+      class="alert alert-danger"
+    >
+      Please, provide a method.
+    </div>      
+
     </ng-container>
     <button type="button" class="btn btn-success" (click)="addInput('methods')">
       Add Method
     </button>
   </div>
+  <ng-container *ngIf="errors.length>0">
+    <div class="alert alert-danger" *ngFor="let error of errors">{{error}}</div>
+  </ng-container>
+
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

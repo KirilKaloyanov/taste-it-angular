@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { RecipeService } from 'src/app/recipes/recipes.service';
 import { TCategory } from 'src/app/shared/interfaces';
 
@@ -8,49 +8,47 @@ import { TCategory } from 'src/app/shared/interfaces';
   templateUrl: './createRecipe.cmpt.html',
   styleUrls: ['./createRecipe.cmpt.css'],
 })
-export class CreateRecipe implements OnInit{
-    // methods: FormArray = [
-    //     new FormControl(null),
-    //     new FormControl(null),
-    // ];
+export class CreateRecipe implements OnInit {
 
-    constructor(private recipeService: RecipeService){}
+  constructor(private recipeService: RecipeService) {}
 
-    categories: TCategory[] = [{name: 'Loading ...', _id: '0'}]
+  categories: TCategory[] = [{ name: 'Loading ...', _id: '0' }];
+  errors: string[] = [];
 
-    createForm: FormGroup = new FormGroup({
-        name: new FormControl(null),
-        numberOfServings: new FormControl(null),
-        ingredients: new FormArray([
-                new FormControl(null)
-            ]),
-        methods: new FormArray([
-            new FormControl(null)
-        ]),
-        category: new FormControl(null)
-    });;
+  createForm: FormGroup = new FormGroup({
+    name: new FormControl(null, Validators.required),
+    numberOfServings: new FormControl(null, [Validators.required, this.isNumberOfServingsPositive]),
+    ingredients: new FormArray([new FormControl(null, Validators.required)]),
+    methods: new FormArray([new FormControl(null, Validators.required)]),
+    category: new FormControl(null, Validators.required),
+  });
 
-    getItemFormsGroup(items: string) {
-        return this.createForm.get(items) as FormArray;
-    }
+  ngOnInit(): void {
+    this.recipeService.getCategories().subscribe({
+      next: (categories) => (this.categories = categories),
+      error: (err) => console.log(err),
+    });
+  }
 
-    deleteInput(index: any, items: string){
-        this.getItemFormsGroup(items).removeAt(index)
-        console.log(index);
-    }
+  getItemFormsGroup(items: string) {
+    return this.createForm.get(items) as FormArray;
+  }
 
-    addInput(items: string){
-        this.getItemFormsGroup(items).push(new FormControl(null))
-    }
+  deleteInput(index: any, items: string) {
+    this.getItemFormsGroup(items).removeAt(index);
+  }
 
-    ngOnInit(): void {
-        this.recipeService.getCategories().subscribe({
-            next: (categories) => this.categories = categories,
-            error: (err) => console.log(err)
-        });
-    }
+  addInput(items: string) {
+    this.getItemFormsGroup(items).push(new FormControl(null, Validators.required));
+  }
 
-    onSubmit(){
-        console.log(this.createForm);
-    }
+  isNumberOfServingsPositive(control: FormControl){
+    if (control.value < 1) return {negativeNumberOfServings: true};
+    return null;
+  }
+
+  onSubmit() {
+    console.log(this.createForm);
+  }
+  
 }
