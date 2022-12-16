@@ -1,0 +1,74 @@
+<h2>Create Recipe</h2>
+<form class="formContainer" [formGroup]="createForm" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label for="name">Title:</label>
+    <input class="form-control" type="text" id="name" formControlName="name" />
+  </div>
+  <div class="mb-3">
+    <label for="numberOfServings">Number Of Servings:</label>
+    <input
+      class="form-control"
+      type="number"
+      id="numberOfServings"
+      formControlName="numberOfServings"
+    />
+  </div>
+  <div class="mb-3">
+    <label>Category:</label>
+    <select id="categories" class="form-control">
+      <option></option>
+      <ng-container *ngFor="let category of categories">
+        <option>{{category.name}}</option> </ng-container
+      >>
+    </select>
+  </div>
+  <div formArrayName="ingredients" class="mb-3">
+    <h5>Ingredients</h5>
+    <ng-container
+      *ngFor="let ingredient of getItemFormsGroup('ingredients').controls; let i=index"
+    >
+      <div class="mb-3 row">
+        <div class="col-md-1 index"><strong>{{i + 1}}</strong></div>
+        <div class="col-md-8">
+          <input class="form-control" type="text" [formGroupName]="i" />
+        </div>
+        <div class="col-md-3">
+          <button
+            class="btn btn-danger"
+            (click)="deleteInput(i, 'ingredients')"
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+    </ng-container>
+    <button type="button" class="btn btn-success" (click)="addInput('ingredients')">
+      Add Indgredient
+    </button>
+  </div>
+  <div formArrayName="ingredients" class="mb-3">
+    <h5>Methods</h5>
+    <ng-container
+      *ngFor="let method of getItemFormsGroup('methods').controls; let i=index"
+    >
+      <div class="mb-3 row">
+        <div class="col-md-1 index"><strong>{{i + 1}}</strong></div>
+        <div class="col-md-8">
+          <input class="form-control" type="text" [formGroupName]="i" />
+        </div>
+        <div class="col-md-3">
+          <button
+            class="btn btn-danger"
+            (click)="deleteInput(i, 'methods')"
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+    </ng-container>
+    <button type="button" class="btn btn-success" (click)="addInput('methods')">
+      Add Method
+    </button>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

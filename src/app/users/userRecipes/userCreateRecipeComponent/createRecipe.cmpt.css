@@ -1,0 +1,17 @@
+.formContainer {
+    width: 900px;
+    margin: 50px auto;
+  }
+  h2 {
+    text-align: center;
+  }
+
+  input{
+    display: inline;
+  }
+
+.index{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
