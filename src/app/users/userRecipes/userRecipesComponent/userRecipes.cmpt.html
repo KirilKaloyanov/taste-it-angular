@@ -3,17 +3,28 @@
 <ng-container *ngIf="userRecipes.length == 0">Loading recipes ... </ng-container>
 
 <ul class="list-group list-group-flush">
-  <ng-container *ngFor="let recipe of userRecipes">
-      <li
-        class="list-group-item d-flex justify-content-between"
-      >
-        <span>
-          <a [routerLink]="'/user/' + userId + '/' + recipe._id">{{ recipe.name }}</a>
-          <span class="badge rounded-pill p-2 m-2 cursor-pointer bg-secondary"
-            >{{ recipe.category.name }}</span
-          >
-        </span>
-        <span class="px-3 m-1 d-flex">{{ recipe.likes.length }}</span>
-      </li>
-    </ng-container>
-    </ul>
+  <ng-container *ngFor="let recipe of userRecipes; let i=index">
+    <li
+      class="list-group-item d-flex justify-content-between"
+    >
+      <span>
+        <a [routerLink]="'/user/' + userId + '/' + recipe._id">{{ recipe.name }}</a>
+        <span class="badge rounded-pill p-2 m-2 cursor-pointer bg-secondary"
+          >{{ recipe.category.name }}</span
+        >
+      </span>
+      <button class="btn btn-danger px-3 m-1 d-flex" (click)="showDeleteDialog(recipe._id, i)">Delete</button>
+    </li>
+  </ng-container>
+</ul>
+<div *ngIf="showModal" class="background-container">
+  <div class="confirm-container">
+    <div>
+      Are you sure?
+    </div>
+    <div>
+      <button class="btn btn-danger m-3" (click)="deleteRecipe()" [disabled]="deleteBtnText == 'Delete ...'" >{{deleteBtnText}}</button>
+      <button class="btn btn-secondary m-3" (click)="hideDeleteDialog()">Cancel</button>
+    </div>
+  </div>
+</div>

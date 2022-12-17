@@ -8,14 +8,18 @@ export class UserRecipeService {
   constructor(private http: HttpClient) {}
 
   getUserRecipes(userId: string) {
-    return this.http.get<any>(this.host + '/recipes/users/' + userId)
+    return this.http.get<any>(this.host + '/recipes/users/' + userId);
   }
 
   createRecipe(recipe: any) {
-    return this.http.post<any>(this.host + '/recipes', recipe)
+    return this.http.post<any>(this.host + '/recipes', recipe);
   }
 
   updateRecipe(recipe: any, id: string) {
-    return this.http.put<any>(this.host + '/recipes/' + id, recipe)
+    return this.http.put<any>(this.host + '/recipes/' + id, recipe);
+  }
+
+  deleteRecipe(id: number) {
+    return this.http.delete<any>(this.host + '/recipes/' + id);
   }
 }
