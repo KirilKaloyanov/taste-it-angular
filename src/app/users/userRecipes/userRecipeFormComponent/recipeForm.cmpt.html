@@ -121,6 +121,6 @@
     </button>
   </div>
 
-
-  <button type="submit" class="btn btn-primary" >Submit</button>
+  <button type="submit" class="btn btn-primary mb-3" [disabled]="disabledSubmitBtn">{{submitBtnText}}</button>
+  <div *ngIf="errors != null" class="alert alert-danger">{{errors}}</div>
 </form>

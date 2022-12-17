@@ -8,8 +8,7 @@ import { LogoutComponent } from './logoutComponent/logout.cmpt';
 import { AuthGuard } from '../shared/guards/authGuard';
 import { UserRecipeService } from './userRecipes.service';
 import { UserRecipes } from './userRecipes/userRecipesComponent/userRecipes.cmpt';
-import { EditRecipe } from './userRecipes/userEditRecipeComponent/editRecipe.cmpt';
-import { CreateRecipe } from './userRecipes/userCreateRecipeComponent/createRecipe.cmpt';
+import { CreateRecipe } from './userRecipes/userRecipeFormComponent/recipeForm.cmpt';
 import { RecipeService } from '../recipes/recipes.service';
 
 @NgModule({
@@ -22,7 +21,6 @@ import { RecipeService } from '../recipes/recipes.service';
       { path: 'register', component: RegisterComponent, canActivate: [AuthGuard], data: {shouldBeLogged: false} },
       { path: 'logout', component: LogoutComponent, canActivate: [AuthGuard], data: {shouldBeLogged: true} },
       { path: 'user/:userId', component: UserRecipes, canActivate: [AuthGuard], data: {shouldBeLogged: true} },
-      // { path: 'user/:userId/createRecipe', component: CreateRecipe, canActivate: [AuthGuard], data: {shouldBeLogged: true} },
       { path: 'user/:userId/:recipeId', component: CreateRecipe, canActivate: [AuthGuard], data: {shouldBeLogged: true} },
     ]),
   ],

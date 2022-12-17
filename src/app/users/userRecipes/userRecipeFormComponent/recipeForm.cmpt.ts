@@ -7,18 +7,22 @@ import { UserRecipeService } from '../../userRecipes.service';
 
 @Component({
   selector: 'create-recipe',
-  templateUrl: './createRecipe.cmpt.html',
-  styleUrls: ['./createRecipe.cmpt.css'],
+  templateUrl: './recipeForm.cmpt.html',
+  styleUrls: ['./recipeForm.cmpt.css'],
 })
 export class CreateRecipe implements OnInit {
   constructor(
     private recipeService: RecipeService,
     private userRecipeService: UserRecipeService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute
   ) {}
   id = this.activatedRoute.snapshot.params['recipeId'];
   userId = this.activatedRoute.snapshot.params['userId'];
+
+  submitBtnText: string = this.id == 'createRecipe' ? 'Create' : 'Update';
+  disabledSubmitBtn: boolean = false;
+  errors: string | null = null;
 
   categories: TCategory[] = [{ name: 'Loading ...', _id: '0' }];
   dynamicInputs: any = { ingredients: true, methods: true };
@@ -42,29 +46,24 @@ export class CreateRecipe implements OnInit {
     if (this.id != 'createRecipe') {
       this.recipeService.getSingleRecipe(this.id).subscribe({
         next: (recipe) => {
-          console.log('onInit', recipe);
-          this.recipeForm.setValue({
+          this.recipeForm.reset({
             name: recipe.name,
             numberOfServings: recipe.numberOfServings,
             category: recipe.category.name,
-            ingredients: recipe.ingredients.map((i: any, index: number) => {
-              if (index == 0) {
-                    this.getItemFormsGroup('ingredients').patchValue([i.ingredient]);
-              }
-              else {
-                  this.getItemFormsGroup('ingredients').push(
-                    new FormControl(i.ingredient, Validators.required)
-                  );
-              }
-            }),
-            methods: recipe.methods.map((i: any, index: number) => {
-              if (index == 0)
-                this.getItemFormsGroup('methods').patchValue([i.method]);
-              else
-                this.getItemFormsGroup('methods').push(
-                  new FormControl(i.method, Validators.required)
-                );
-            }),
+            ingredients: [recipe.ingredients[0].ingredient],
+            methods: [recipe.methods[0].method],
+          });
+          recipe.ingredients.forEach((i: any, index: number) => {
+            if (index > 0)
+              this.getItemFormsGroup('ingredients').push(
+                new FormControl(i.ingredient, Validators.required)
+              );
+          });
+          recipe.methods.forEach((i: any, index: number) => {
+            if (index > 0)
+              this.getItemFormsGroup('methods').push(
+                new FormControl(i.method, Validators.required)
+              );
           });
         },
         error: (err) => console.log(err),
@@ -103,23 +102,33 @@ export class CreateRecipe implements OnInit {
 
   onSubmit() {
     if (this.recipeForm.valid) {
-        const recipe = mapRecipe(this.recipeForm.value);
+      const recipe = mapRecipe(this.recipeForm.value);
+
+      this.submitBtnText =
+        this.id == 'createRecipe' ? 'Create ...' : 'Update ...';
+      this.disabledSubmitBtn = true;
+
       if (this.id != 'createRecipe') {
-        this.userRecipeService
-          .updateRecipe(recipe, this.id)
-          .subscribe({
-            next: () => this.router.navigate([`/user/${this.userId}`]),
-          });
+        this.userRecipeService.updateRecipe(recipe, this.id).subscribe({
+          next: () => this.router.navigate([`/user/${this.userId}`]),
+        });
       } else {
         this.userRecipeService.createRecipe(recipe).subscribe({
           next: () => this.router.navigate([`/user/${this.userId}`]),
         });
       }
+      } else {
+        this.errors = 'All Fields are required';
+        setTimeout(() => this.errors = null, 3000);
     }
     function mapRecipe(recipe: any) {
-        recipe.ingredients = recipe.ingredients.map((i: any, index: number) =>  {return {id: index, ingredient: i}});
-        recipe.methods = recipe.methods.map((i: any, index: number) =>  {return {id: index, method: i}});
-        return recipe;
+      recipe.ingredients = recipe.ingredients.map((i: any, index: number) => {
+        return { id: index, ingredient: i };
+      });
+      recipe.methods = recipe.methods.map((i: any, index: number) => {
+        return { id: index, method: i };
+      });
+      return recipe;
     }
   }
 }
