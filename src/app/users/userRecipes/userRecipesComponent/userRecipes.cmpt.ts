@@ -12,6 +12,7 @@ export class UserRecipes implements OnInit{
     constructor(private activatedRoute: ActivatedRoute, private userRecipeService: UserRecipeService) {}
 
     userRecipes: TRecipe[] | [] = [];
+    loadingRecipes: boolean = true;
     showModal: boolean = false;
     deleteBtnText: string = 'Delete';
     recipeForDeletion: {id: number, index: number} = {id: -1, index: -1};
@@ -19,7 +20,11 @@ export class UserRecipes implements OnInit{
     userId = this.activatedRoute.snapshot.params['userId'];
     ngOnInit(): void {
         this.userRecipeService.getUserRecipes(this.userId).subscribe({
-            next: recipes => this.userRecipes = recipes,
+            next: recipes => {
+                if (!recipes.message)
+                this.userRecipes = recipes;
+                this.loadingRecipes = false;
+            },
             error: err => console.log(err)
         });
     }

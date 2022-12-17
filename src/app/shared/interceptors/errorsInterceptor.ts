@@ -13,7 +13,6 @@ import { RecipeService } from 'src/app/recipes/recipes.service';
 @Injectable()
 export class ErrorsInterceptor implements HttpInterceptor {
   constructor(private router: Router, private recipeService: RecipeService) {
-    console.log('1.inter constr')
   }
   errror$$ = this.recipeService.error$$;
   
@@ -21,10 +20,8 @@ export class ErrorsInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
     ): Observable<HttpEvent<any>> {
-    console.log('2.inter meth')
     return next.handle(req).pipe(
       catchError((err: HttpErrorResponse) => {
-        console.log('3.inter err')
         
         if (err.status == 401) {
           this.router.navigate(['/login']);
@@ -34,7 +31,6 @@ export class ErrorsInterceptor implements HttpInterceptor {
           err.error.message != 'Invalid username or password' &&
           err.error.errors?.username.message != 'Username is already registered'
           ) {
-          console.log('4.inter if')
           this.errror$$.next(err.error.message);
           this.router.navigate(['/error']);
         }
@@ -44,7 +40,4 @@ export class ErrorsInterceptor implements HttpInterceptor {
     );
   }
 
-  // getError() {
-  //     return this.error$$;
-  // }
 }

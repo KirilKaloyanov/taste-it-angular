@@ -1,8 +1,9 @@
 <h2>Your Recipes</h2>
-<a routerLink="createRecipe"><button class="btn btn-primary">New Recipe</button> </a>
-<ng-container *ngIf="userRecipes.length == 0">Loading recipes ... </ng-container>
+<a routerLink="createRecipe"><button class="btn btn-primary mb-3">New Recipe</button> </a>
+<div *ngIf="loadingRecipes">Loading recipes ... </div>
+<div *ngIf="userRecipes.length == 0 && !loadingRecipes">No Recipes created yet </div>
 
-<ul class="list-group list-group-flush">
+<ul class="list-group list-group-flush" *ngIf="userRecipes.length > 0">
   <ng-container *ngFor="let recipe of userRecipes; let i=index">
     <li
       class="list-group-item d-flex justify-content-between"
