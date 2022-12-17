@@ -40,11 +40,16 @@ User components provide functionality for registering, logging users in and out.
 
 When a user is logged-in the User recipes component is responsible for rendering the collection of user recipes. From this component the user can add new recipe, edit existing recipes and delete them. A form provides functionality to add new the new recipe or edit the existing one. Both components use the user recipe service to communicate to the back-end for data persistence.
 
-### Recipe components
+### Recipes components
 
 There are two main recipe components accessible for all users (logged-in or not). The recipes component provides the list of all recipes with filtering options based on the recipes category. The recipe component provides details for a single recipe. Two helper components are avalaible to logged-in users. These are recipeComments component and recipeLike component. 
 
 
 ### Guards
 
-The AuthGuard is a class which
+The AuthGuard prevents users who are not authenticated to access the resource in the private part of the application.
+
+
+### Interceptors
+
+There are two interceptors which manage all requests made to the back-end. The error interceptor is responsible to navigate the user to an error page whenever the back-end sends errors unhandled by the client app. The token intereceptor adds the token to every request from a logged-in user in order to auhtenticate the user in front of the back-end. 

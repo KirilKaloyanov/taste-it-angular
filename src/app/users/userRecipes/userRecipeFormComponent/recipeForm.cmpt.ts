@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeService } from 'src/app/recipes/recipes.service';
 import { TCategory } from 'src/app/shared/interfaces';
 import { UserRecipeService } from '../../userRecipes.service';
+import { UsersService } from '../../users.service';
 
 @Component({
   selector: 'create-recipe',
@@ -15,9 +16,11 @@ export class RecipeForm implements OnInit {
     private recipeService: RecipeService,
     private userRecipeService: UserRecipeService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private usersService: UsersService
   ) {}
   id = this.activatedRoute.snapshot.params['recipeId'];
+  user = this.usersService.getUsername();
   userId = this.activatedRoute.snapshot.params['userId'];
 
   submitBtnText: string = this.id == 'createRecipe' ? 'Create' : 'Update';
@@ -43,9 +46,11 @@ export class RecipeForm implements OnInit {
       next: (categories) => (this.categories = categories),
       error: (err) => console.log(err),
     });
+    
     if (this.id != 'createRecipe') {
       this.recipeService.getSingleRecipe(this.id).subscribe({
         next: (recipe) => {
+          if (recipe.userId.username !== this.user) this.router.navigate(['/not-found']);
           this.recipeForm.reset({
             name: recipe.name,
             numberOfServings: recipe.numberOfServings,
@@ -53,12 +58,14 @@ export class RecipeForm implements OnInit {
             ingredients: [recipe.ingredients[0].ingredient],
             methods: [recipe.methods[0].method],
           });
+
           recipe.ingredients.forEach((i: any, index: number) => {
             if (index > 0)
               this.getItemFormsGroup('ingredients').push(
                 new FormControl(i.ingredient, Validators.required)
               );
           });
+
           recipe.methods.forEach((i: any, index: number) => {
             if (index > 0)
               this.getItemFormsGroup('methods').push(

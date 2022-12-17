@@ -16,7 +16,6 @@ import { AuthGuard } from './shared/guards/authGuard';
 import { NotFoundComponent } from './notFoundComponent/not-found.component';
 import { ErrorComponent } from './errorComponent/error.cmpt';
 import { ErrorsInterceptor } from './shared/interceptors/errorsInterceptor';
-import { ResponseInterceptor } from './shared/interceptors/responseInterceptor';
 import { UsersService } from './users/users.service';
 
 @NgModule({
@@ -44,11 +43,7 @@ import { UsersService } from './users/users.service';
       useClass: ErrorsInterceptor,
       multi: true
     },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ResponseInterceptor,
-      multi: true
-    },
+
     AuthGuard,
     UsersService
   ], 
