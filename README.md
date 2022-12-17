@@ -26,7 +26,7 @@ The application (the client-side) is developed using Angular and has a source fo
 
 ### Modules and services
 
-Appart from the app module, there are two more modules. One is the users module which encapuslates the service and components responsible for authenticating users and the user recipes service with components which manage CRUD operations for the user's collection of recipes. The other module is the recipes module which holds the components for displaying the app's collection of recipes using a recipe service back-end communication.
+Appart from the app module, there are two more modules. One is the users module. It encapuslates the service and components responsible for authenticating users. It is also responsible for the user recipes service and components which manage CRUD operations for the user's collection of recipes. The other module is the recipes module which holds the components for displaying the app's collection of recipes using a recipe service back-end communication. Each module holds the specific routes which navigates to the respective components.
 
 ### Common Components
 
@@ -52,4 +52,4 @@ The AuthGuard prevents users who are not authenticated to access the resource in
 
 ### Interceptors
 
-There are two interceptors which manage all requests made to the back-end. The error interceptor is responsible to navigate the user to an error page whenever the back-end sends errors unhandled by the client app. The token intereceptor adds the token to every request from a logged-in user in order to auhtenticate the user in front of the back-end. 
+There are two interceptors which manage all requests made to the back-end. The error interceptor is responsible to navigate the user to an error page whenever the back-end sends errors unhandled by a component in the app. The token intereceptor adds the token to every request from a logged-in user in order to auhtenticate the user in front of the back-end. 

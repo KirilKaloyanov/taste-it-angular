@@ -21,7 +21,7 @@ export class RecipeForm implements OnInit {
   ) {}
   id = this.activatedRoute.snapshot.params['recipeId'];
   user = this.usersService.getUsername();
-  userId = this.activatedRoute.snapshot.params['userId'];
+  userId = this.usersService.getUserId();
 
   submitBtnText: string = this.id == 'createRecipe' ? 'Create' : 'Update';
   disabledSubmitBtn: boolean = false;
