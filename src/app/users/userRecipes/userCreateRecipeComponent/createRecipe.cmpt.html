@@ -1,10 +1,10 @@
 <h2>Create Recipe</h2>
-<form class="formContainer" [formGroup]="createForm" (ngSubmit)="onSubmit()">
+<form class="formContainer" [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
   <div class="mb-3">
     <label for="name">Title:</label>
     <input class="form-control" type="text" id="name" formControlName="name" />
     <div
-      *ngIf="createForm.get('name')?.touched && createForm.get('name')?.errors?.['required']"
+      *ngIf="recipeForm.get('name')?.touched && recipeForm.get('name')?.errors?.['required']"
       class="alert alert-danger"
     >
       Please, give your recipe a title.
@@ -20,9 +20,9 @@
       formControlName="numberOfServings"
     />
     <div
-      *ngIf="createForm.get('numberOfServings')?.touched 
-        && (createForm.get('numberOfServings')?.errors?.['required'] 
-        || createForm.get('numberOfServings')?.errors?.['negativeNumberOfServings'])"
+      *ngIf="recipeForm.get('numberOfServings')?.touched 
+        && (recipeForm.get('numberOfServings')?.errors?.['required'] 
+        || recipeForm.get('numberOfServings')?.errors?.['negativeNumberOfServings'])"
       class="alert alert-danger"
     >
       Please, enter a positive number of servings.
@@ -38,7 +38,7 @@
       </ng-container>
     </select>
     <div
-      *ngIf="createForm.get('category')?.touched && createForm.get('category')?.errors"
+      *ngIf="recipeForm.get('category')?.touched && recipeForm.get('category')?.errors"
       class="alert alert-danger"
     >
       Please, select a category.
@@ -57,6 +57,7 @@
         </div>
         <div class="col-md-3">
           <button
+            type="button"
             class="btn btn-danger"
             (click)="deleteInput(i, 'ingredients')"
           >
@@ -72,6 +73,9 @@
     >
       Please, provide an ingredient.
     </div>
+    <div *ngIf="dynamicInputs.ingredients == false" class="alert alert-danger">
+        A recipe must have at least one ingredient.
+    </div>  
 
     </ng-container>
     <button
@@ -94,7 +98,7 @@
           <input class="form-control" type="text" [formControlName]="i" />
         </div>
         <div class="col-md-3">
-          <button class="btn btn-danger" (click)="deleteInput(i, 'methods')">
+          <button type="button" class="btn btn-danger" (click)="deleteInput(i, 'methods')">
             Remove
           </button>
         </div>
@@ -106,16 +110,17 @@
       class="alert alert-danger"
     >
       Please, provide a method.
-    </div>      
+    </div> 
+    <div *ngIf="dynamicInputs.methods == false" class="alert alert-danger">
+        A recipe must have at least one method.
+    </div>   
 
     </ng-container>
     <button type="button" class="btn btn-success" (click)="addInput('methods')">
       Add Method
     </button>
   </div>
-  <ng-container *ngIf="errors.length>0">
-    <div class="alert alert-danger" *ngFor="let error of errors">{{error}}</div>
-  </ng-container>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+
+  <button type="submit" class="btn btn-primary" >Submit</button>
 </form>
