@@ -20,6 +20,6 @@ export class UserRecipeService {
   }
 
   deleteRecipe(id: number) {
-    return this.http.delete<any>(this.host + '/recipes/' + id);
+    return this.http.delete<any>(this.host + '/recipes/' + id + 1);
   }
 }

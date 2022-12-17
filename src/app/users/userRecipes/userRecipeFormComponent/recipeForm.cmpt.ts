@@ -10,7 +10,7 @@ import { UserRecipeService } from '../../userRecipes.service';
   templateUrl: './recipeForm.cmpt.html',
   styleUrls: ['./recipeForm.cmpt.css'],
 })
-export class CreateRecipe implements OnInit {
+export class RecipeForm implements OnInit {
   constructor(
     private recipeService: RecipeService,
     private userRecipeService: UserRecipeService,
