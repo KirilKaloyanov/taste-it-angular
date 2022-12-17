@@ -17,6 +17,7 @@ import { NotFoundComponent } from './notFoundComponent/not-found.component';
 import { ErrorComponent } from './errorComponent/error.cmpt';
 import { ErrorsInterceptor } from './shared/interceptors/errorsInterceptor';
 import { ResponseInterceptor } from './shared/interceptors/responseInterceptor';
+import { UsersService } from './users/users.service';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, NavbarComponent, NotFoundComponent, ErrorComponent],
@@ -49,6 +50,7 @@ import { ResponseInterceptor } from './shared/interceptors/responseInterceptor';
       multi: true
     },
     AuthGuard,
+    UsersService
   ], 
   bootstrap: [AppComponent],
 })

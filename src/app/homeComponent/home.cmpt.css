@@ -1,14 +1,10 @@
-img {
-  position: absolute;
-  width: 150px;
-}
-
 .navbar_container {
   display: flex;
-  justify-content:center;
+  justify-content: center;
 }
 
 ul {
+    margin-top: 180px;
   align-self: center;
 }
 
@@ -20,14 +16,13 @@ li {
 
 li > a:hover {
   background-color: rgb(46, 160, 253);
+  color: white;
 }
 
 li > a {
-  padding: 20px 20px;
+  padding: 80px 60px;
   text-decoration: none;
   color: initial;
+  font-size: 36px;
 }
 
-.active {
-  background-color: rgb(46, 160, 253);
-}

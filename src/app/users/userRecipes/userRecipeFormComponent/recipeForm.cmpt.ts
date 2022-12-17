@@ -111,16 +111,19 @@ export class RecipeForm implements OnInit {
       if (this.id != 'createRecipe') {
         this.userRecipeService.updateRecipe(recipe, this.id).subscribe({
           next: () => this.router.navigate([`/user/${this.userId}`]),
+          error: (err) => console.log(err),
         });
       } else {
         this.userRecipeService.createRecipe(recipe).subscribe({
           next: () => this.router.navigate([`/user/${this.userId}`]),
+          error: (err) => console.log(err),
         });
       }
-      } else {
-        this.errors = 'All Fields are required';
-        setTimeout(() => this.errors = null, 3000);
+    } else {
+      this.errors = 'All Fields are required';
+      setTimeout(() => (this.errors = null), 3000);
     }
+
     function mapRecipe(recipe: any) {
       recipe.ingredients = recipe.ingredients.map((i: any, index: number) => {
         return { id: index, ingredient: i };

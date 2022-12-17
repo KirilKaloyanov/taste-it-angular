@@ -1,0 +1,13 @@
+<div class="navbar_container">
+  <ul>
+    <li>
+      <a routerLink="/recipes"><strong>Explore Recipes</strong></a>
+    </li>
+
+    <ng-container *ngIf="user != null">
+      <li>
+        <a [routerLink]="'/user/' + userId"><strong>Your Recipes</strong></a>
+      </li>
+    </ng-container>
+  </ul>
+</div>

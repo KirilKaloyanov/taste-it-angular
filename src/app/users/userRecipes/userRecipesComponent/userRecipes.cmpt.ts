@@ -43,7 +43,8 @@ export class UserRecipes implements OnInit{
                 this.userRecipes.splice(this.recipeForDeletion.index, 1);
                 this.hideDeleteDialog();
                 this.deleteBtnText = 'Delete';
-            }
+            },
+            error: err => console.log(err)
         })
     }
 }

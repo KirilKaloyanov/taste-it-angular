@@ -32,7 +32,7 @@ export class ErrorsInterceptor implements HttpInterceptor {
         
         if (
           err.error.message != 'Invalid username or password' &&
-          err.error.errors.username.message != 'Username is already registered'
+          err.error.errors?.username.message != 'Username is already registered'
           ) {
           console.log('4.inter if')
           this.errror$$.next(err.error.message);
