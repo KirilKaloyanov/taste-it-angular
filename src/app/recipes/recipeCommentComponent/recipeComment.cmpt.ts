@@ -5,9 +5,9 @@ import { RecipeService } from '../recipes.service';
   selector: 'recipe-comment',
   template: `<h4 class="mt-4">New Comment</h4>
     <form #form="ngForm" (submit)="submitComment(form)">
-      <textarea class="form-control" ngModel name="commentText"></textarea>
+      <textarea class="form-control" ngModel name="commentText" (input)="onInput()"></textarea>
       <ng-container>
-        <div class="alert alert-danger" *ngIf="errors != null || ''">
+        <div class="alert alert-danger" *ngIf="errors != ''">
           {{ errors }}
         </div>
       </ng-container>
@@ -16,14 +16,16 @@ import { RecipeService } from '../recipes.service';
 })
 export class RecipeCommentComponent {
   submitBtnText = 'Comment';
-  errors!: string;
+  errors: string = '';
   @Input('recipeId') recipeId!: number;
   @Input('renderRecipe') renderRecipe!: any; 
 
   constructor(private recipeService: RecipeService) {}
 
+  onInput() {this.errors = ''}
+
   submitComment(form: any) {
-    if (form.value.commentText == '') {
+    if (form.value.commentText == '' || form.value.commentText == null) {
       this.errors = 'You cannot submit empty comment';
       return;
     }

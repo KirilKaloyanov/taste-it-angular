@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -11,12 +10,12 @@ import { UsersModule } from './users/user.module';
 import { AppComponent } from './app.cmpt';
 import { HomeComponent } from './homeComponent/home.cmpt';
 import { NavbarComponent } from './navbarComponent/navbar.cmpt';
-import { TokenInterceptor } from './shared/interceptors/tokenInterceptor';
-import { AuthGuard } from './shared/guards/authGuard';
 import { NotFoundComponent } from './notFoundComponent/not-found.component';
 import { ErrorComponent } from './errorComponent/error.cmpt';
-import { ErrorsInterceptor } from './shared/interceptors/errorsInterceptor';
 import { UsersService } from './users/users.service';
+import { AuthGuard } from './shared/guards/authGuard';
+import { TokenInterceptor } from './shared/interceptors/tokenInterceptor';
+import { ErrorsInterceptor } from './shared/interceptors/errorsInterceptor';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, NavbarComponent, NotFoundComponent, ErrorComponent],
