@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
 import { TRecipe } from "src/app/shared/interfaces";
 import { UserRecipeService } from "../../userRecipes.service";
+import { UsersService } from "../../users.service";
 
 @Component({
     selector: 'user-recipes',
@@ -9,7 +9,7 @@ import { UserRecipeService } from "../../userRecipes.service";
     styleUrls: ['./userRecipes.cmpt.css']
 })
 export class UserRecipes implements OnInit{
-    constructor(private activatedRoute: ActivatedRoute, private userRecipeService: UserRecipeService) {}
+    constructor(private usersService: UsersService, private userRecipeService: UserRecipeService) {}
 
     userRecipes: TRecipe[] | [] = [];
     loadingRecipes: boolean = true;
@@ -17,16 +17,19 @@ export class UserRecipes implements OnInit{
     deleteBtnText: string = 'Delete';
     recipeForDeletion: {id: number, index: number} = {id: -1, index: -1};
 
-    userId = this.activatedRoute.snapshot.params['userId'];
+    userId = this.usersService.getUserId();
+
     ngOnInit(): void {
-        this.userRecipeService.getUserRecipes(this.userId).subscribe({
-            next: recipes => {
-                if (!recipes.message)
-                this.userRecipes = recipes;
-                this.loadingRecipes = false;
-            },
-            error: err => console.log(err)
-        });
+        if (this.userId != null) {
+            this.userRecipeService.getUserRecipes(this.userId).subscribe({
+                next: recipes => {
+                    if (!recipes.message)
+                    this.userRecipes = recipes;
+                    this.loadingRecipes = false;
+                },
+                error: err => console.log(err)
+            });
+        }
     }
 
     showDeleteDialog(id: number, index: number) {

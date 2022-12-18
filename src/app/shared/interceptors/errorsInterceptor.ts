@@ -22,7 +22,6 @@ export class ErrorsInterceptor implements HttpInterceptor {
     ): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((err: HttpErrorResponse) => {
-        
         if (err.status == 401) {
           this.router.navigate(['/login']);
         }
